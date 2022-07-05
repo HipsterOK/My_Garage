@@ -1,13 +1,12 @@
 package com.example.mygarage
 
-import android.R.attr.button
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.BaseAdapter
+import android.widget.Button
+import android.widget.TextView
 import com.example.mygarage.R.layout.car_item
 
 
@@ -42,9 +41,9 @@ class CarAdapter(context: Context?, cars: ArrayList<Car>?):BaseAdapter(){
 
         // заполняем View в пункте списка данными из товаров: наименование, цена
         // и картинка
-        (view!!.findViewById<View>(R.id.idCar) as TextView).setText(p.ID.toString())
-        (view.findViewById<View>(R.id.nameCar) as TextView).setText(p.name)
-        (view.findViewById<View>(R.id.plateCar) as TextView).setText(p.plate)
+        (view!!.findViewById<View>(R.id.idCar) as TextView).text = p.ID.toString()
+        (view.findViewById<View>(R.id.nameCar) as TextView).text = p.name
+        (view.findViewById<View>(R.id.plateCar) as TextView).text = p.plate
         val delCar = view.findViewById<View>(R.id.delCar) as Button
         // присваиваем чекбоксу обработчик
         delCar.setOnClickListener(View.OnClickListener {
@@ -58,5 +57,9 @@ class CarAdapter(context: Context?, cars: ArrayList<Car>?):BaseAdapter(){
     // товар по позиции
     fun getCar(position: Int): Car {
         return getItem(position) as Car
+    }
+
+    override fun isEnabled(position: Int): Boolean {
+        return true
     }
 }
